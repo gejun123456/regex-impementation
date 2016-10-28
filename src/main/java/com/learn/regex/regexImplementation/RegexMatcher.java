@@ -53,6 +53,7 @@ public class RegexMatcher {
             equalMap.put(startState,Arrays.asList(startState));
         } else {
             List<Integer> allRoutes= new ArrayList<Integer>();
+            allRoutes.add(startState);
             for (int i = 0; i < routes.getRoutes().size(); i++) {
                 allRoutes.addAll(collect(equalMap,routes.getRoutes().get(i),nfa));
             }
