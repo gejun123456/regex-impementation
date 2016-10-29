@@ -36,8 +36,9 @@ public class NFABuilder {
         return unitStack.pop();
     }
 
+    //todo if need to use new instance.
     //if need to create new object for search.
-    //实现了?号和+号
+    //实现了?号和+号 每次返回一个实例的好处
     private static NFAUnit buildSingleNFA(NFAUnit a, char c,int[] startState) {
         NFAUnit unit = new NFAUnit();
         if(c=='*'){

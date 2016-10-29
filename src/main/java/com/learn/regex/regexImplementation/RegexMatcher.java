@@ -71,5 +71,9 @@ public class RegexMatcher {
         Assertions.assertThat(false).isEqualTo(match("abbb","abcd"));
         Assertions.assertThat(false).isEqualTo(match("abcd","ab|cd"));
         Assertions.assertThat(true).isEqualTo(match("ab","ab|cd"));
+        Assertions.assertThat(true).isEqualTo(match("a","a?"));
+        Assertions.assertThat(true).isEqualTo(match("aab","a+b"));
+        Assertions.assertThat(false).isEqualTo(match("b","a+b"));
+
     }
 }
