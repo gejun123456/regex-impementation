@@ -62,6 +62,8 @@ public class RegexMatcher {
         return equalMap.get(startState);
     }
 
+    //test passed.
+    //however need to create more case.
     public static void main(String[] args) {
         Assertions.assertThat(true).isEqualTo(match("abcd","abcd"));
         Assertions.assertThat(true).isEqualTo(match("aa","(a|b)*"));
@@ -72,8 +74,11 @@ public class RegexMatcher {
         Assertions.assertThat(false).isEqualTo(match("abcd","ab|cd"));
         Assertions.assertThat(true).isEqualTo(match("ab","ab|cd"));
         Assertions.assertThat(true).isEqualTo(match("a","a?"));
+        Assertions.assertThat(true).isEqualTo(match("a","aa?"));
         Assertions.assertThat(true).isEqualTo(match("aab","a+b"));
         Assertions.assertThat(false).isEqualTo(match("b","a+b"));
+        Assertions.assertThat(false).isEqualTo(match("aaaaba","a+b"));
+
 
     }
 }
