@@ -25,7 +25,7 @@ public class RegexMatchToBack {
             char cur = regex.charAt(i);
             // 当前位是开始符 且前一个是结束符
             if(Character.isLetterOrDigit(cur)||cur=='('){
-                if(before==')'||Character.isLetterOrDigit(before)||before=='*'){
+                if(before==')'||Character.isLetterOrDigit(before)||RegexOperator.isSingleOperator(before)){
                     andRegex.append("-");
                 }
             }
@@ -43,12 +43,16 @@ public class RegexMatchToBack {
             put('|',1);
             put('-',3);
             put('*',5);
+            put('+',5);
+            put('?',5);
             put('(',0);
         }};
         Map<Character,Integer> leftMap= new HashMap<Character, Integer>(){{
             put('|',2);
             put('-',4);
             put('*',6);
+            put('+',6);
+            put('?',6);
             put('(',7);
             put(')',0);
         }};
@@ -66,11 +70,11 @@ public class RegexMatchToBack {
                 } else if(leftMap.get(c)<rightMap.get(operatorStack.peek())){
                     while(!operatorStack.isEmpty()&&leftMap.get(c)<rightMap.get(operatorStack.peek())){
                         char operator = operatorStack.pop();
-                        if(operator=='-'||operator=='|'){
+                        if(RegexOperator.isLinkOperator(operator)){
                             String a = letterStack.pop();
                             String b=  letterStack.pop();
                             letterStack.push(a+b+operator);
-                        } else if(operator=='*'){
+                        } else if(RegexOperator.isSingleOperator(operator)){
                             String a = letterStack.pop();
                             letterStack.push(a+operator);
                         }
@@ -91,11 +95,11 @@ public class RegexMatchToBack {
         }
         while(!operatorStack.isEmpty()){
             char operator = operatorStack.pop();
-            if(operator=='-'||operator=='|'){
+            if(RegexOperator.isLinkOperator(operator)){
                 String a = letterStack.pop();
                 String b=  letterStack.pop();
                 letterStack.push(a+b+operator);
-            } else if(operator=='*'){
+            } else if(RegexOperator.isSingleOperator(operator)){
                 String a = letterStack.pop();
                 letterStack.push(a+operator);
             }

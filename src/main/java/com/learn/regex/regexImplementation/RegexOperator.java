@@ -14,6 +14,8 @@ public class RegexOperator {
 
     private static Set<Character> singleOperator = new HashSet<Character>(){{
         add('*');
+        add('?');
+        add('+');
     }};
 
     public static  boolean isOperator(char c){
