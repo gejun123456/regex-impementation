@@ -9,7 +9,7 @@ import java.util.*;
 //need check with the code.
 public class DFAbuilder {
 
-    public DFAUnit createDFA(String regex){
+    public static DFAUnit createDFA(String regex){
         NFAUnit nfa = NFABuilder.createNFA(regex);
         //use with nfa to build the dfa.
         int startState = nfa.getStartState();
@@ -73,7 +73,7 @@ public class DFAbuilder {
     }
 
     //this will check wether the new states is in past lists.
-    private int checkMapContain(Set<Integer> finalStates, Map<Integer, Set<Integer>> dfsMappingStates) {
+    private static int checkMapContain(Set<Integer> finalStates, Map<Integer, Set<Integer>> dfsMappingStates) {
         int i = -1;
         for(Integer u : dfsMappingStates.keySet()){
             i = u;
@@ -88,7 +88,7 @@ public class DFAbuilder {
         return i;
     }
 
-    private Set<Integer> buildFinal(Map<Integer, Set<Integer>> equalStates, Set<Integer> states, NFAUnit nfa) {
+    private static Set<Integer> buildFinal(Map<Integer, Set<Integer>> equalStates, Set<Integer> states, NFAUnit nfa) {
         Set<Integer> ss = new HashSet<Integer>();
         for (Integer state : states){
             ss.addAll(collect(equalStates,state,nfa));
@@ -96,7 +96,7 @@ public class DFAbuilder {
         return ss;
     }
 
-    private Set<Character> getCharFrom(Set<Integer> nfastates, NFAUnit nfa) {
+    private static Set<Character> getCharFrom(Set<Integer> nfastates, NFAUnit nfa) {
         Set<Character> useChars = new HashSet<Character>();
         if(nfa.getJumpMap()==null){
             return useChars;
@@ -115,7 +115,7 @@ public class DFAbuilder {
     }
 
     //拿到一个state所有可以通过空运算符得到的状态
-    private Set<Integer> collect(Map<Integer, Set<Integer>> equalStates, int startState, NFAUnit nfa) {
+    private static Set<Integer> collect(Map<Integer, Set<Integer>> equalStates, int startState, NFAUnit nfa) {
         if(equalStates.containsKey(startState)){
             return equalStates.get(startState);
         }
