@@ -43,12 +43,16 @@ public class RegexMatchToBack {
             put('|',1);
             put('-',3);
             put('*',5);
+            put('+',5);
+            put('?',5);
             put('(',0);
         }};
         Map<Character,Integer> leftMap= new HashMap<Character, Integer>(){{
             put('|',2);
             put('-',4);
             put('*',6);
+            put('+',6);
+            put('?',6);
             put('(',7);
             put(')',0);
         }};

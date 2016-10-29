@@ -18,10 +18,8 @@ public class RegexPreStringFormatter {
     }
 
 
-    //写好case的控制
+    //写好case的控制 //只处理.号的生成
     public static void main(String[] args) {
-        //是否交给nfa来控制比较好。 +号和?号
-        assertThat("aa*").isEqualTo(prehandle("a+"));
 
     }
 }

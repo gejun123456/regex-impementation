@@ -109,7 +109,7 @@ public class DFAbuilder {
             Map<Character, List<Integer>> characterListMap = nfa.getJumpMap().get(state);
             if(characterListMap!=null){
                 for(Character c:characterListMap.keySet()){
-                    if(c!='Ø'){
+                    if(c!= OpConstants.EMPTY){
                         useChars.add(c);
                     }
                 }
@@ -123,7 +123,7 @@ public class DFAbuilder {
         if(equalStates.containsKey(startState)){
             return equalStates.get(startState);
         }
-        char c = 'Ø';
+        char c = OpConstants.EMPTY;
         StateRoute endStates = nfa.getEndStateByStateAndC(startState, c);
         if(endStates==null){
             //将自己放进去

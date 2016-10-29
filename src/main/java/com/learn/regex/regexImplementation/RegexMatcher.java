@@ -48,7 +48,7 @@ public class RegexMatcher {
         if(equalMap.containsKey(startState)){
             return equalMap.get(startState);
         }
-        StateRoute routes = nfa.getEndStateByStateAndC(startState, 'Ø');
+        StateRoute routes = nfa.getEndStateByStateAndC(startState, OpConstants.EMPTY);
         if(routes==null){
             equalMap.put(startState,Arrays.asList(startState));
         } else {
