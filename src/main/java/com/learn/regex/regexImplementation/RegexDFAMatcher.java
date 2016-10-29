@@ -7,11 +7,23 @@ import org.assertj.core.api.Assertions;
  */
 public class RegexDFAMatcher {
     public static boolean match(String word,String pattern){
+        //生成最终的dfa图
         DFAUnit dfa = DFAbuilder.createDFA(pattern);
-        return true;
+        int state = dfa.getStartState();
+        for (int i = 0; i < word.length(); i++) {
+            if(dfa.getDfjump()!=null&&dfa.getDfjump().get(state)!=null&&dfa.getDfjump().get(state).get(word.charAt(i))!=null) {
+                state = dfa.getDfjump().get(state).get(word.charAt(i));
+            } else {
+                return false;
+            }
+        }
+        return dfa.isEndStates(state);
     }
 
     public static void main(String[] args) {
+        Assertions.assertThat(true).isEqualTo(match("a","a"));
+        System.out.println("haha");
+        Assertions.assertThat(true).isEqualTo(match("ab","ab"));
         Assertions.assertThat(true).isEqualTo(match("abcd","abcd"));
         Assertions.assertThat(true).isEqualTo(match("aa","(a|b)*"));
         Assertions.assertThat(true).isEqualTo(match("ab","a*b"));

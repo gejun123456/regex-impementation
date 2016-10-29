@@ -55,4 +55,8 @@ public class DFAUnit {
         }
         endState.add(a);
     }
+
+    public boolean isEndStates(int state){
+        return this.endState.contains(state);
+    }
 }

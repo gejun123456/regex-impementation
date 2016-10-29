@@ -27,6 +27,7 @@ public class DFAbuilder {
         info.setDfsState(dfastart[0]);
         info.setNfastates(starts);
         dfastart[0]++;
+        stateInfos.offer(info);
         while(!stateInfos.isEmpty()){
             NFAforDFAStateInfo poll = stateInfos.poll();
             Set<Integer> nfastates = poll.getNfastates();
@@ -83,6 +84,9 @@ public class DFAbuilder {
                     i = -1;
                     break;
                 }
+            }
+            if(i!=-1){
+                return i;
             }
         }
         return i;
