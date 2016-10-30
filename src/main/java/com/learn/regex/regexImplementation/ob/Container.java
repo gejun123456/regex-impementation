@@ -5,5 +5,13 @@ package com.learn.regex.regexImplementation.ob;
  */
 public class Container {
     //当前是否是操作服 如* | { -等
-    private boolean isOperator;
+    protected ContainerEnum type;
+
+    public ContainerEnum getType() {
+        return type;
+    }
+
+    public void setType(ContainerEnum type) {
+        this.type = type;
+    }
 }

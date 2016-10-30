@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class RegexMatcher {
     public static boolean match(String word,String pattern){
-        NFAUnit nfa = NFABuilder.createNFA(pattern);
+        NFAUnit nfa = NFABuilder.createNFAByContainer(pattern);
         //shall to match with things.
         //first find all started state.
         int startState = nfa.getStartState();
@@ -78,7 +78,7 @@ public class RegexMatcher {
         Assertions.assertThat(true).isEqualTo(match("aab","a+b"));
         Assertions.assertThat(false).isEqualTo(match("b","a+b"));
         Assertions.assertThat(false).isEqualTo(match("aaaaba","a+b"));
-
-
+        Assertions.assertThat(true).isEqualTo(match("a*","a\\*"));
+        Assertions.assertThat(false).isEqualTo(match("a*","\\*"));
     }
 }

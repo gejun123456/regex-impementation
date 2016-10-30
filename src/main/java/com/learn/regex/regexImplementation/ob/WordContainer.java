@@ -5,12 +5,19 @@ package com.learn.regex.regexImplementation.ob;
  */
 //匹配普通字符 \* . a b  [ 等 只有在为[的时候有控制
 public class WordContainer extends Container{
-    private char value;
+    protected char value;
 
     public WordContainer(char value){
         this.type = ContainerEnum.SIMPLEWORD;
         this.value = value;
     }
+
+    public WordContainer(ContainerEnum type, char value){
+        this.type =type;
+        this.value= value;
+    }
+
+    public WordContainer(){}
 
     public char getValue() {
         return value;

@@ -7,9 +7,14 @@ import com.learn.regex.regexImplementation.ob.Container;
  */
 //作为操作符的容器  * | {
 public class OperatorContainer extends Container {
-    private char value;
+    protected char value;
 
-    private String specialValue;
+    public OperatorContainer(char value){
+        this.type = ContainerEnum.OPERATOR;
+        this.value = value;
+    }
+
+    public OperatorContainer(){}
 
     public char getValue() {
         return value;
@@ -17,17 +22,5 @@ public class OperatorContainer extends Container {
 
     public void setValue(char value) {
         this.value = value;
-    }
-
-    public String getSpecialValue() {
-        return specialValue;
-    }
-
-    public void setSpecialValue(String specialValue) {
-        this.specialValue = specialValue;
-    }
-
-    public boolean isSpecialValue(char a){
-        return a=='{';
     }
 }

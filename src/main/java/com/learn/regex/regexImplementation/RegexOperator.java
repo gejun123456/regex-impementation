@@ -16,6 +16,7 @@ public class RegexOperator {
         add('*');
         add('?');
         add('+');
+        add('{');
     }};
 
     public static  boolean isOperator(char c){
