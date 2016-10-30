@@ -9,13 +9,14 @@ import java.util.Set;
 public class RegexOperator {
     private static Set<Character> linkOperator = new HashSet<Character>(){{
         add('|');
-        add('-');
+        add('&');
     }};
 
     private static Set<Character> singleOperator = new HashSet<Character>(){{
         add('*');
         add('?');
         add('+');
+        add('{');
     }};
 
     public static  boolean isOperator(char c){
