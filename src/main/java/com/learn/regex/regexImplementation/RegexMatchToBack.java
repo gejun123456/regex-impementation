@@ -19,7 +19,7 @@ public class RegexMatchToBack {
 
     private static Map<Character, Integer> rightMap = new HashMap<Character, Integer>() {{
         put('|', 1);
-        put('-', 3);
+        put('&', 3);
         put('*', 5);
         put('+', 5);
         put('?', 5);
@@ -28,7 +28,7 @@ public class RegexMatchToBack {
     }};
     private static Map<Character, Integer> leftMap = new HashMap<Character, Integer>() {{
         put('|', 2);
-        put('-', 4);
+        put('&', 4);
         put('*', 6);
         put('{',6);
         put('+', 6);
