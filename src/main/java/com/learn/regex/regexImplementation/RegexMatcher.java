@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class RegexMatcher {
     public static boolean match(String word,String pattern){
-        NFAUnit nfa = NFABuilder.createNFA(pattern);
+        NFAUnit nfa = NFABuilder.createNFAByContainer(pattern);
         //shall to match with things.
         //first find all started state.
         int startState = nfa.getStartState();
@@ -65,6 +65,8 @@ public class RegexMatcher {
     //test passed.
     //however need to create more case.
     public static void main(String[] args) {
+        Assertions.assertThat(true).isEqualTo(match("a","a"));
+        Assertions.assertThat(true).isEqualTo(match("ab","ab"));
         Assertions.assertThat(true).isEqualTo(match("abcd","abcd"));
         Assertions.assertThat(true).isEqualTo(match("aa","(a|b)*"));
         Assertions.assertThat(true).isEqualTo(match("ab","a*b"));
@@ -78,7 +80,22 @@ public class RegexMatcher {
         Assertions.assertThat(true).isEqualTo(match("aab","a+b"));
         Assertions.assertThat(false).isEqualTo(match("b","a+b"));
         Assertions.assertThat(false).isEqualTo(match("aaaaba","a+b"));
+        Assertions.assertThat(true).isEqualTo(match("a*","a\\*"));
+        Assertions.assertThat(false).isEqualTo(match("a*","\\*"));
 
+        Assertions.assertThat(true).isEqualTo(match("c","[a-k]"));
+
+        Assertions.assertThat(false).isEqualTo(match("l","[a-k]"));
+
+        Assertions.assertThat(true).isEqualTo(match("aaa","a{3}"));
+        Assertions.assertThat(false).isEqualTo(match("aaa","a{4}"));
+        Assertions.assertThat(true).isEqualTo(match("aaaa","a{4}"));
+        Assertions.assertThat(true).isEqualTo(match("aa","a{1,2}"));
+        Assertions.assertThat(true).isEqualTo(match("aaaa","a{3,4}"));
+
+        Assertions.assertThat(true).isEqualTo(match("aaa","a{3,4}"));
+        Assertions.assertThat(false).isEqualTo(match("aaaaa","a{3,4}"));
+        Assertions.assertThat(false).isEqualTo(match("aaa","a{4}"));
 
     }
 }
