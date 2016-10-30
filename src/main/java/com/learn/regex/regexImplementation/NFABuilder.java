@@ -95,7 +95,7 @@ public class NFABuilder {
     private static NFAUnit buildByBigOperator(String bigValue, NFAUnit pop,int[] statedState) {
 //        return null;
         //need to copy one out.
-        String[] split = bigValue.split("-");
+        String[] split = bigValue.split(",");
         if (split.length==1){
             Integer num = Integer.parseInt(split[0]);
             NFAUnit b;
@@ -116,13 +116,11 @@ public class NFABuilder {
             }
 
             //之后要通过活来搞
-            NFAUnit g  = buildSame(pop,statedState);
-            if((end-start)==1){
-                return buildLinkNFA(a,g,'&',statedState);
-            }
-            for (int i = 0; i < end - start-1; i++) {
+            NFAUnit g = buildEmpty(statedState);
+            for (int i = 0; i < end-start; i++) {
                 NFAUnit next = buildSame(pop,statedState);
-                for (int j = 1; j < i; j++) {
+                //这样即可。
+                for (int j =0; j < i; j++) {
                     NFAUnit u  =buildSame(pop,statedState);
                     next = buildLinkNFA(next,u,'&',statedState);
                 }
@@ -130,6 +128,14 @@ public class NFABuilder {
             }
             return buildLinkNFA(a,g,'&',statedState);
         }
+    }
+
+    private static NFAUnit buildEmpty(int[] statedState) {
+        NFAUnit g = new NFAUnit();
+        g.setStartState(statedState[0]++);
+        g.setEndState(statedState[0]++);
+        g.addPathToMap(g.getStartState(), OpConstants.EMPTY,g.getEndState());
+        return g;
     }
 
     private static NFAUnit buildSame(NFAUnit pop,int[] startedState) {

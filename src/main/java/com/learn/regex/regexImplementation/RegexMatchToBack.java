@@ -40,13 +40,28 @@ public class RegexMatchToBack {
         StringBuilder andRegex = new StringBuilder();
         //remove tab out and between.
         andRegex.append(regex.charAt(0));
+        boolean preMid = false;
+        boolean preBig = false;
         char before = regex.charAt(0);
         for (int i = 1; i < regex.length(); i++) {
             char cur = regex.charAt(i);
             // 当前位是开始符 且前一个是结束符
+            if(cur=='{'){
+                preBig = true;
+            }
+            if(cur=='['){
+                preMid= true;
+            }
+
+            if(cur=='}'){
+                preBig = false;
+            }
+            if(cur==']'){
+                preMid = false;
+            }
             if (isStartChar(cur)) {
-                if (isEndChar(before)) {
-                    andRegex.append("-");
+                if (isEndChar(before)&&!preMid&&!preBig) {
+                    andRegex.append("&");
                 }
             }
             andRegex.append(cur);
